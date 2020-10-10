@@ -1,0 +1,93 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section*{\large Exercício 1}
+\addcontentsline{toc}{chapter}{\protect\numberline{}\large Exercício 1}%
+
+%Bla bla bla
+
+% EXEMPLO PARA ADICIONAR FIGURA
+%\begin{figure}[ht!]
+	%\caption{Série e histogramas.}
+%	\vspace{0mm}	% acrescentar o espaçamento vertical apropriado entre o título e a borda superior da figura
+%	\begin{center}
+%		\resizebox{15cm}{!}{\includegraphics{Figuras/ex1/Exercicio1_n_64.jpg}}		
+%	\end{center}
+%	\vspace{-2mm}	% acrescentar o espaçamento vertical apropriado entre a borda inferior da figura e a legenda ou a fonte quando não há legenda (o valor pode ser negativo para subir)
+%	\legenda{Figura 1.1: Dez sinais e seus respectivos histogramas para  asérie com $N$ = 64 do grupo noise.}	% legenda - para deixar sem legenda usar comando \legenda{} (nunca deve-se comentar o comando \legenda)
+%	\label{ex1_fig1}
+%	%\FONTE{}	% fonte consultada (elemento obrigatório, mesmo que seja produção do próprio autor)
+%\end{figure}
+
+\subsection*{1.1} 
+\addcontentsline{toc}{section}{\protect\numberline{} 1.1}%
+
+Mostrarei que 
+
+\begin{equation*}
+\int f(t)\overline{g(t)} dt = \frac{1}{2 \pi} \int \hat{f}(\xi)\overline{\hat{g}(\xi)} d\xi.
+\end{equation*}
+
+\textbf{Resolução:}
+
+Pelas definições de Transformada de Fourier,
+
+\begin{equation}
+\text{FT::  } \hat{f}(\xi) = \int_{-\infty}^{+\infty} f(t) e^{-\imath \xi t}d t,
+\label{eq:ft}
+\end{equation}
+
+e Transformada Inversa de Fourier,
+
+\begin{equation}
+\text{IFT::  } f(t) = \frac{1}{2 \pi} \int_{-\infty}^{+\infty} \hat{f}(\xi) e^{\imath \xi t}d \xi,
+\label{eq:ift}
+\end{equation}
+
+podemos escrever (abandonando os limites de integração por redundância):
+
+\begin{align*} 
+\int f(t)\overline{g(t)} dt  &=  \int \left( \frac{1}{2 \pi} \int \hat{f}(\xi) e^{\imath \xi t}d \xi \right) \left( \frac{1}{2 \pi} \int \overline{\hat{g}(\xi')} e^{-\imath \xi' t}d \xi' \right) d t \\[10pt]
+ &=  \left(\frac{1}{2 \pi}\right)^{2} \int \int \hat{f}(\xi) \overline{\hat{g}(\xi')} \left( \int e^{\imath(\xi - \xi')t} dt\right) d \xi' d\xi.
+\end{align*}
+
+A última expressão entre parênteses acima pode ser reescrita pois ela é a função delta:
+
+\begin{equation*}
+\int_{-\infty}^{+\infty} e^{\imath(\xi - \xi')t} dt = 2 \pi \delta(\xi - \xi ').
+\end{equation*}
+
+Substituindo esse resultado:
+
+\begin{align*} 
+\int f(t)\overline{g(t)} dt  &= \frac{1}{2 \pi} \int \hat{f}(\xi) \left( \int \overline{\hat{g}(\xi ')} \delta(\xi - \xi ') d \xi ' \right) d \xi \\[10pt]
+ &= \frac{1}{2 \pi}  \int f(\xi )\overline{g(\xi)} dt. \tag*{(Q.E.D.) }
+\end{align*} 
+Neste último passo, utilizou-se a propriedade geral da função delta: $\int_{-\infty}^{+\infty }F(\xi') \delta(\xi - \xi') d \xi' = F(\xi)$.
+
+\subsection*{1.2}
+\addcontentsline{toc}{section}{\protect\numberline{} 1.2}%
+
+Mostrarei que, considerando a relação de Parseval, a IFT pode ser escrita como:
+
+\begin{equation*}
+f(t) = \int_{-\infty}^{+\infty} \hat{f}(\xi)e^{\imath \xi t} d t.
+\end{equation*}
+
+\textbf{Resolução:}
+
+Da Eq. \ref{eq:ift}:
+
+\begin{equation*}
+f(t) = \frac{1}{2 \pi} \int_{-\infty}^{+\infty} \hat{f}(\xi) e^{\imath \xi t}d \xi.
+\end{equation*}
+
+Mas, conforme a relação de Parseval, a norma $\mathbb{L}^{2}(\mathbb{R})$ se conserva entre o espaço não transformado e no de Fourier, ou seja, 
+
+\begin{equation*}
+\int_{-\infty}^{+\infty}|f(t)|^{2}dt = \frac{1}{2 \pi}\int_{-\infty}^{+\infty}|\hat{f}(\xi)|^{2}d \xi,
+\end{equation*}
+portanto:
+
+\begin{align*}
+f(t) = \int_{-\infty}^{+\infty} \hat{f}(\xi)e^{\imath \xi t} d t. \tag*{(Q.E.D.)}
+\end{align*}

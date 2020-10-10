@@ -1,0 +1,40 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section*{\large Exercício 4}
+\addcontentsline{toc}{chapter}{\protect\numberline{}\large Exercício 4}%
+
+Mostrarei que (comutatividade da convolução):
+
+\begin{align*}
+[f \star g] = [g \star f].
+\end{align*}
+
+\textbf{Resolução:}
+
+Da definição de convolução, podemos escrever a convolução da função $f$ com a função $g$ como:
+
+\begin{equation*}
+(f \star g)(t) = \int_{-\infty}^{+\infty}f(u)g(t-u)d u.
+\end{equation*}
+
+Fazendo $\tau = t-u$:
+
+\begin{align*}
+(f \star g)(t) &= -\int_{t+\infty}^{t-\infty}f(t - \tau)g(\tau)d \tau \\[10pt]
+ &= -\int_{+\infty}^{-\infty}f(t - \tau)g(\tau) d \tau \\[10pt]
+ &= \int_{-\infty}^{+\infty}f(t-\tau)g(\tau)d\tau \\[10pt]
+ &= (g \star f). \tag*{(Q.E.D.)}
+\end{align*}
+
+% EXEMPLO PARA ADICIONAR FIGURA
+%\begin{figure}[ht!]
+	%\caption{Série e histogramas.}
+%	\vspace{0mm}	% acrescentar o espaçamento vertical apropriado entre o título e a borda superior da figura
+%	\begin{center}
+%		\resizebox{15cm}{!}{\includegraphics{Figuras/ex1/Exercicio1_n_64.jpg}}		
+%	\end{center}
+%	\vspace{-2mm}	% acrescentar o espaçamento vertical apropriado entre a borda inferior da figura e a legenda ou a fonte quando não há legenda (o valor pode ser negativo para subir)
+%	\legenda{Figura 1.1: Dez sinais e seus respectivos histogramas para  asérie com $N$ = 64 do grupo noise.}	% legenda - para deixar sem legenda usar comando \legenda{} (nunca deve-se comentar o comando \legenda)
+%	\label{ex1_fig1}
+%	%\FONTE{}	% fonte consultada (elemento obrigatório, mesmo que seja produção do próprio autor)
+%\end{figure}

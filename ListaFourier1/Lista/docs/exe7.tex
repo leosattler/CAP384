@@ -1,0 +1,52 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section*{\large Exercício 7}
+\addcontentsline{toc}{chapter}{\protect\numberline{}\large Exercício 7}%
+
+Mostrarei, por indução, a complexidade $\mathcal{O}(n\log_{2}{}n)$ de um algoritmo.
+
+\textbf{Resolução:}
+
+O algoritmo FFT funciona dividindo a soma discreta da DFT de um input de tamanho $n=2^{k}$ em duas somas: uma em $n/2$ termos pares e outra em $n/2$ termos ímpares. Esse procedimento pode ser implementado recursivamente, de modo que a cada passo de divisão pela metade teremos de computar $n$ termos através de somas distintas. 
+
+Um algoritmo com essa característica, que precisa realizar $n$ operações antes, durante e após dividi-las em duas metades, pode ser expresso pela seguinte equação de recorrência ($T_{n}$ denota o valor de uma função $T(n)$ de complexidade de tempo em função do tamanho do input $n$)
+
+\begin{equation*}
+ \left\{ \begin{array}{rl} 
+T_{n} = 2 T_{\frac{n}{2}} + n,  & n \geq 2  \\
+T_{1} = 0.  & 
+\end{array}\right.
+\end{equation*}
+
+Reescrevendo $T_{n}$:
+
+\begin{align*}
+T_{n} = T_{2^{k}} &= 2 T_{2^{k-1}} + 2^{k} \\[10pt]
+ \frac{T_{2^{k}}}{2^{k}} &= \frac{2 T_{2^{k-1}} + 2^{k}}{2^{k}} = \frac{2 T_{2^{k-1}}}{2^{k}} + \frac{2^{k}}{2^{k}} \\[10pt]
+ \frac{T_{2^{k}}}{2^{k}} &= \frac{T_{2^{k-1}}}{2^{k-1}} + 1 \\[10pt]
+ \frac{T_{2^{k}}}{2^{k}} &= \frac{T_{2^{k-2}}}{2^{k-2}} + 1 + 1 \\
+ &\vdots \\
+ \frac{T_{2^{k}}}{2^{k}} &= \frac{T_{2^{0}}}{2^{0}} + \ldots + 1 + 1 \\[10pt]
+ \frac{T_{2^{k}}}{2^{k}} &= 0 + \ldots + 1 + 1 \\[10pt]
+ \frac{T_{2^{k}}}{2^{k}} &= k.
+\end{align*}
+
+Lembrando que $n=2^{k}$, temos que $k=\log_{2}n$, e a última relação pode ser reescrita:
+
+\begin{align*}
+ \frac{T_{2^{k}}}{2^{k}} = \frac{T_{n}}{n} &= \log_{2} n \\
+ T_{n} &= n \log_{2} n \tag*{(Q.E.D.)}
+\end{align*}
+
+% EXEMPLO PARA ADICIONAR FIGURA
+%\begin{figure}[ht!]
+	%\caption{Série e histogramas.}
+%	\vspace{0mm}	% acrescentar o espaçamento vertical apropriado entre o título e a borda superior da figura
+%	\begin{center}
+%		\resizebox{15cm}{!}{\includegraphics{Figuras/ex1/Exercicio1_n_64.jpg}}		
+%	\end{center}
+%	\vspace{-2mm}	% acrescentar o espaçamento vertical apropriado entre a borda inferior da figura e a legenda ou a fonte quando não há legenda (o valor pode ser negativo para subir)
+%	\legenda{Figura 1.1: Dez sinais e seus respectivos histogramas para  asérie com $N$ = 64 do grupo noise.}	% legenda - para deixar sem legenda usar comando \legenda{} (nunca deve-se comentar o comando \legenda)
+%	\label{ex1_fig1}
+%	%\FONTE{}	% fonte consultada (elemento obrigatório, mesmo que seja produção do próprio autor)
+%\end{figure}

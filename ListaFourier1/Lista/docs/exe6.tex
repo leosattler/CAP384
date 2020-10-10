@@ -1,0 +1,139 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section*{\large Exercício 6}
+\addcontentsline{toc}{chapter}{\protect\numberline{}\large Exercício 6}%
+
+Apresentarei a decomposição da matriz da DFT para um input de tamanho 8 (por exemplo, um sinal representado por um vetor de números reais):
+
+\begin{equation*}
+F_{8} = 
+\begin{bmatrix}
+W_{8}^{0} & W_{8}^{0} & W_{8}^{0} & W_{8}^{0} & W_{8}^{0} & W_{8}^{0} & W_{8}^{0} & W_{8}^{0} \\
+W_{8}^{0} & W_{8}^{1} & W_{8}^{2} & W_{8}^{3} & W_{8}^{4} & W_{8}^{5} & W_{8}^{6} & W_{8}^{7} \\
+W_{8}^{0} & W_{8}^{2} & W_{8}^{4} & W_{8}^{6} & W_{8}^{8} & W_{8}^{10} & W_{8}^{12} & W_{8}^{14} \\
+W_{8}^{0} & W_{8}^{3} & W_{8}^{6} & W_{8}^{9} & W_{8}^{12} & W_{8}^{15} & W_{8}^{18} & W_{8}^{21} \\
+W_{8}^{0} & W_{8}^{4} & W_{8}^{8} & W_{8}^{12} & W_{8}^{16} & W_{8}^{20} & W_{8}^{24} & W_{8}^{28} \\
+W_{8}^{0} & W_{8}^{5} & W_{8}^{10} & W_{8}^{15} & W_{8}^{20} & W_{8}^{25} & W_{8}^{30} & W_{8}^{35} \\
+W_{8}^{0} & W_{8}^{6} & W_{8}^{12} & W_{8}^{18} & W_{8}^{24} & W_{8}^{30} & W_{8}^{36} & W_{8}^{42} \\
+W_{8}^{0} & W_{8}^{7} & W_{8}^{14} & W_{8}^{21} & W_{8}^{28} & W_{8}^{35} & W_{8}^{42} & W_{8}^{49}
+\end{bmatrix},
+\end{equation*}
+
+onde $W_{N}=e^{-2\imath \pi /N}$ é a $N$-ésima raiz de um.
+
+
+\textbf{Resolução:}
+
+De modo geral, pode-se decompor a matriz da DFT de tamanho $2N \times 2N$ no seguinte produto de matrizes:
+
+\begin{equation*}
+F_{2N} = 
+\begin{bmatrix}
+I_{N} & D_{N}\\
+I_{N} & -D_{N} 
+\end{bmatrix}
+\begin{bmatrix}
+F_{N} & \\
+ & F_{N} 
+\end{bmatrix}
+P_{2N},
+\end{equation*}
+
+onde $I_{N}$ é a matriz identidade de tamanho $N \times N$, $D_{N}$ é a matriz diagonal com entradas $1, W, \cdots, W^{N-1}$, ou seja, potências consecutivas de $W$:
+
+\begin{equation*}
+\raa{.8}
+D_{N} = 
+\begin{bmatrix}
+1 &  &  &  & \\
+ & W &  &  & \\
+ &  & W^{2} &  & \\
+ &  &  & \ddots  & \\
+ &  &  &  & W^{N-1}
+\end{bmatrix},
+\end{equation*}
+
+e $P_{2N}$ é a matriz de permutação de tamanho $2N \times 2N$: 
+
+\begin{equation*}
+\raa{.65}
+P_{2N} = 
+\begin{bmatrix}
+1 & 0 & 0 &    0   & \cdots & 0 & 0\\
+0 & 0 & 1 &    0   & \cdots & 0 & 0\\
+  &   &   & \vdots &        &   &  \\
+0 & 0 & 0 &    0   & \cdots & 1 & 0\\
+0 & 1 & 0 &    0   & \cdots & 0 & 0\\
+0 & 0 & 0 &    1   & \cdots & 0 & 0\\
+  &   &   & \vdots &        &   &  \\
+0 & 0 & 0 &    0   & \cdots & 0 & 1
+\end{bmatrix},
+\end{equation*}
+
+que organiza o vetor de input em termos pares e ímpares.
+
+Desse modo, a decomposiçao de $F_{8}$ é:
+
+\begin{equation*}
+F_{4} = 
+\begin{bmatrix}
+I_{4} & D_{4}\\
+I_{4} & -D_{4} 
+\end{bmatrix}
+\begin{bmatrix}
+F_{4} & \\
+ & F_{4} 
+\end{bmatrix}
+P_{8},
+\end{equation*}
+
+onde $F_{4}$ é:
+
+\begin{equation*}
+F_{8} = 
+\begin{bmatrix}
+W_{4}^{0} & W_{4}^{0} & W_{4}^{0} & W_{4}^{0} \\
+W_{4}^{0} & W_{4}^{1} & W_{4}^{2} & W_{4}^{3} \\
+W_{4}^{0} & W_{4}^{2} & W_{4}^{4} & W_{4}^{6} \\
+W_{4}^{0} & W_{4}^{3} & W_{4}^{6} & W_{4}^{9}
+\end{bmatrix}.
+\end{equation*}
+
+Portanto, se temos um sinal com oito amostras, representado pelo vetor $\mathbf{f}$, e estamos interessados em calcular sua transformada $\mathbf{\hat{f}}$, podemos realizar a seguinte operação:
+\vspace{-2mm}
+\begin{align*}
+\mathbf{\hat{f}} &= F_{8} \mathbf{f}.
+\end{align*} 
+Se ao invés do sinal nossos dados forem de um vetor com informações no domínio da frequência, podemos realizar a operação inversa para obter de volta o sinal:
+\begin{align*}
+\mathbf{\hat{f}} &= F_{8} \mathbf{f} \\
+F_{8}^{H} \mathbf{\hat{f}} &= F_{8}^{H} F_{8}  \mathbf{f} = \mathbf{f} \therefore \\
+\mathbf{f} &= F_{8}^{H} \mathbf{\hat{f}},
+\end{align*} 
+onde $F_{8}^{H}$ denota o conjugado Hermitiano (ou conjugado transposto) da matriz $F_{8}$.
+%\begin{equation*}
+%F_{8} = 
+%\begin{bmatrix}
+%a & b & c & d & a & b & c & d \\
+%d & e & f & d & a & b & c & d \\
+%g & h & i & d & a & b & c & d \\
+%a & b & c & d & a & b & c & d \\
+%d & e & f & d & a & b & c & d \\
+%g & h & i & d & a & b & c & d \\
+%a & b & c & d & a & b & c & d \\
+%d & e & f & d & a & b & c & d 
+%\end{bmatrix}
+%\end{equation*}
+
+% EXEMPLO PARA ADICIONAR FIGURA
+%\begin{figure}[ht!]
+	%\caption{Série e histogramas.}
+%	\vspace{0mm}	% acrescentar o espaçamento vertical apropriado entre o título e a borda superior da figura
+%	\begin{center}
+%		\resizebox{15cm}{!}{\includegraphics{Figuras/ex1/Exercicio1_n_64.jpg}}		
+%	\end{center}
+%	\vspace{-2mm}	% acrescentar o espaçamento vertical apropriado entre a borda inferior da figura e a legenda ou a fonte quando não há legenda (o valor pode ser negativo para subir)
+%	\legenda{Figura 1.1: Dez sinais e seus respectivos histogramas para  asérie com $N$ = 64 do grupo noise.}	% legenda - para deixar sem legenda usar comando \legenda{} (nunca deve-se comentar o comando \legenda)
+%	\label{ex1_fig1}
+%	%\FONTE{}	% fonte consultada (elemento obrigatório, mesmo que seja produção do próprio autor)
+%\end{figure}
