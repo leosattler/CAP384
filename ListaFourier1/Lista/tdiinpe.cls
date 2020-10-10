@@ -526,7 +526,7 @@ top=3cm,bottom=3cm]{geometry}	% acrescentado por gjfb em 2011-12-06
 \newcommand{\listsimbname}{LISTA DE SÍMBOLOS}
 \newcommand{\FONTEname}{Fonte}
 %\newcommand{\avisoDeOriginal}{Registro do documento original:}	% comentado por gjfb em 2010-05-01
-\newcommand{\avisoDeOriginal}{Arquivos se encontram em:}	% acrescentado por gjfb em 2010-05-01 ALTERADO
+\newcommand{\avisoDeOriginal}{Repositório desta lista:}	% acrescentado por gjfb em 2010-05-01 ALTERADO
 \newcommand{\cardCaption}{Dados Internacionais de Catalogação na Publicação (CIP)}
 \newcommand{\PublicadoPor}{Publicado por}
 %\newcommand{\ConselhoDeEditoracao}{CONSELHO DE EDITORAÇÃO}	% comentado por gjfb em 2010-05-01
@@ -1157,7 +1157,7 @@ pdfauthor = {\@author},
  
  % {\vspace*{\stretch{5}}{\centering\normalfont\scriptsize\avisoDeOriginal \\ <\href{http://urlib.net/\@repositorio}{http://urlib.net/\@repositorio}>\par}}	% comentado por gjfb em 2010-05-01
  % LINK GITHUB: https://github.com/leosattler/Mat.-Comp.-I-B
- {\vspace*{\stretch{5}}{\centering\normalfont\small\avisoDeOriginal \\ <\href{https://github.com/leosattler/Mat.-Comp.-I-B\@IBI}{github/Lista-CAP-239B\@IBI}>\par}}	% acrescentado por gjfb em 2010-05-01
+ {\vspace*{\stretch{5}}{\centering\normalfont\small\avisoDeOriginal \\ <\href{https://github.com/leosattler/CAP384.git\@IBI}{github/CAP-384\@IBI}>\par}}	% acrescentado por gjfb em 2010-05-01
  {\vspace*{\stretch{5}}{\centering\normalfont\normalsize\@instituicaosigla \\ 
      \@instituicaocidade  \\ \@date\par}}
 %
