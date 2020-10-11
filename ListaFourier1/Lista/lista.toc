@@ -11,6 +11,7 @@
 \contentsline {chapter}{\numberline {}\large Exercício 6}{12}{section*.26}%
 \contentsline {chapter}{\numberline {}\large Exercício 7}{14}{section*.27}%
 \contentsline {chapter}{\numberline {}\large Exercício 8}{16}{section*.30}%
-\contentsline {chapter}{\numberline {}\large Exercício 9}{17}{section*.31}%
-\contentsline {chapter}{\numberline {}\large Exercício 10}{18}{section*.32}%
+\contentsline {chapter}{\numberline {}\large Exercício 9}{18}{section*.31}%
+\contentsline {chapter}{\numberline {}\large Exercício 10}{19}{section*.32}%
+\contentsline {chapter}{REFERÊNCIAS BIBLIOGRÁFICAS}{20}{chapter.1}%
 \contentsfinish 
