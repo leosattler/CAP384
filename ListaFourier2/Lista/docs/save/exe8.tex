@@ -1,0 +1,39 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section*{\large Exercício 8}
+\addcontentsline{toc}{chapter}{\protect\numberline{}\large Exercício 8}%
+
+\textbf{Relatório:} 
+
+\begin{center}
+\large{Algoritmo FFT de Cooley-Tukey e Abordagens Similares}
+\end{center}
+
+O algoritmo Fast Fourier Transform (FFT) é um algoritmo eficiente para calcular a transformada discreta de Fourier. Para um input de tamanho $n$, este algoritmo calcula a transformada de Fourier em tempo $\mathcal{O}(n\log_{2}n)$. Ele foi primeiro discutido por \citeonline{cooley1965algorithm}, que o popularizou e ofereceu uma implementação (doravante chamada C-T). Aparentemente, o algoritmo por eles apresentado já havia sido inventado por Gauss em 1865 \cite{strang1993wavelet}. Ele funciona para qualquer input que pode ser reescrito como $n=n_1 n_2$ ao expressar a transformada discreta sobre o input $n$ em termos menores de tamanhos $n_1$ e $n_2$, que por sua vez podem ser divididos em partes menores, e assim sucessivamente (e recursivamente) até que se chegue a fatores primos. 
+
+Dado um input $n$, diversas escolhas de sua fatoração são possíveis. Usualmente, ou  $n_1$ ou $n_2$ é um fator constante pequeno e limitado (chamado de \textit{radix}). Se $n_1 = $ \textit{radix} o procedimento é conhecido como DIT (Decimation in Time), e se $n_2 = $ \textit{radix}, DIF (Decimation in Frequency). Quando o input $n$ é uma potência de dois, por exemplo $n=2^{k}$, o \textit{radix-2} DIT pode ser implementado, que é a versão mais simples e comum do algoritmo C-T. Ela divide a transformada discreta de tamanho $n$ em duas transformadas intercaladas de tamanho $n/2$ em cada estágio recursivo. As implementações conhecidas como \textit{radix-4} e \textit{radix-8}, para inputs que são potência de quatro e oito, respectivamente, reduzem o número de passos intermediários (multiplicações complexas) e podem ser de 20\%-30\% mais rápidas que a \textit{radix-2}. Por sua vez, o algoritmo \textit{split-radix} utiliza tanto o \textit{radix-2} quanto o \textit{radix-4} em sua implementação, oferecendo a eficiência do \textit{radix-4} para inputs que são potência de dois.
+
+Além das diferentes fatorações de $n$, a transposição do input para o output requer rearranjo de dados que pode ser executada de diferentes maneiras. Isso permite novas abordagens. Por isso as FFT's são ainda hoje muito estudadas, e o limite máximo de otimização um assunto debatido. Buscando eficiência computacional global e de casos específicos (e.g., $n$ primo), diversos algoritmos propõem novas estratégias de implementação do algoritmos original de C-T. 
+
+O prime-factor algorithm FPA (algoritmo de fatoração de primos) também conhecido como FFT de Goot-Thomas \cite{good1958interaction}, pode ser usado como uma implementação FFT eficiente no caso de $n = n_1 n_2$ sendo $n_1$ e $n_2$ mutuamente primos. Ou seja, enquanto o algoritmo de C-T pode ser usado para quaisquer fatores, o PFA está restrito a fatores mutuamente primos. Além disso, a manipulação dos dados de entrada é mais complexa e se baseia no Teorema chinês do resto \cite{cr}. Outro algoritmo que explora a fatoração de primos é a FFT de Winograd, que pode ser usada para $n = 2, 3 4, 5, 7, 8, 11, 13$ e $16$ \cite{ftmw}.
+
+Já para $n$ primo, o algoritmo de Rader é uma FFT que computa a transformada discreta de Fourier ao reescrevê-la como uma convolução cíclica \cite{rader1968discrete}. Outro algoritmo que realiza procedimento similar é a FFT de Bluestein, porém este não está restrito a $n$ primo. A FFT de Winograd citada acima utiliza dos princípios do algoritmo de Rader para o caso de $n$ primo. A FFT de Rader pode ser otimizada por um fator de dois no caso de inputs reais, mas assim como os demais algoritmos de FFT citados até aqui, sua complexidade é $\mathcal{O}(n\log_{2}n)$.
+
+Se aplicarmos as diferentes FFT's existentes ao mesmo input, obteremos (obviamente) o mesmo output. Entretanto, cada algoritmo difere na maneira em que os resultados intermediários são armazenados e alterados. Isso motiva abordagens de otimização não somente sobre o software, mas também sobre o hardware, de modo a explorar vetorização, otimização de acessos à cache e paralelização. Em particular, a subrotina FFTW \cite{frigo1998fftw} em \texttt{C} é amplamente usada. Além de automaticamente selecionar a FFT mais efetiva baseando-se na natureza do input, ela explora a arquitetura da máquina implementando otimizações durante a compilação (e.g., \textit{loop unrolling}). Desde a versão 1.1, a FFTW inclui uma subrotina para transformada paralela de Fourier, compatível com sistemas de memória compartilhada e de memória distribuída. 
+
+Algoritmos \textit{radix-2} e \textit{radix-4} podem ser implementados em paralelo ao executar cada uma das sub-transformadas discretas (sobre os diferentes fatores de $n$) ao mesmo tempo. Já o \textit{split-radix}, que é composto dos algoritmos \textit{radix-2} e \textit{radix-4}, pode ser dividido em dois processos independentes para cada um destes. Estes, por sua vez, podem ser implementados paralelamente, configurando o cenário de máxima utilização do hardware paralelo. Para estas e outras implementações em paralelo de transformadas baseadas em C-T, ver \citeonline{balducci1996comparative}. Outra abordagem existente é a de \citeonline{swarztrauber1984fft}, que oferece uma adaptação do C-T e de outros algoritmos de FFT para computadores com vetorização.% O trabalho de \citeonline{pease1968adaptation} foi, para uma adaptação da FFT para processamento em paralelo. 
+
+%FFTW is fast partly because it cleverly combines the abovealgorithms based onNand the machine architecture
+
+% EXEMPLO PARA ADICIONAR FIGURA
+%\begin{figure}[ht!]
+	%\caption{Série e histogramas.}
+%	\vspace{0mm}	% acrescentar o espaçamento vertical apropriado entre o título e a borda superior da figura
+%	\begin{center}
+%		\resizebox{15cm}{!}{\includegraphics{Figuras/ex1/Exercicio1_n_64.jpg}}		
+%	\end{center}
+%	\vspace{-2mm}	% acrescentar o espaçamento vertical apropriado entre a borda inferior da figura e a legenda ou a fonte quando não há legenda (o valor pode ser negativo para subir)
+%	\legenda{Figura 1.1: Dez sinais e seus respectivos histogramas para  asérie com $N$ = 64 do grupo noise.}	% legenda - para deixar sem legenda usar comando \legenda{} (nunca deve-se comentar o comando \legenda)
+%	\label{ex1_fig1}
+%	%\FONTE{}	% fonte consultada (elemento obrigatório, mesmo que seja produção do próprio autor)
+%\end{figure}
