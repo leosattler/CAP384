@@ -2,5 +2,37 @@
 
 \chapter{METODOLOGIA}
 
-Bla bla bla.
+A transformada de Fourier é um método extremamente importante na análise de sinais. Entretanto, este método possui uma limitação intrínseca: enquanto ele captura bem todos os conteúdos frequenciais de um sinal, a transformada não é capaz de capturar o momento no tempo em que as várias frequências se manifestam. 
 
+Dada sua limitação, o físico Húngaro Gabór Dénes propôs um método formal de localização no tempo e na frequência a partir de uma modificação do núcleo da transformada de Fourier \cite{gabor1946theory}. Esse núcleo é introduzido com o objetivo de localização no tempo e na frequência das características de um sinal. A transformada de Gábor é a formulação original da transformada discreta janelada de Fourier (com uma função Gaussiana), e por isso também é chamada de WFT ou Windowed Fourier Transform (Transformada Janelada de Fourier em inglês). A WFT é definida conforme abaixo:
+
+\begin{equation}
+\widehat{f}(\xi, b) = \int_{-\infty}^{+\infty}f(t)g(t-b)e^{-\i \xi t}dt.
+\end{equation}
+
+Essa também é uma transformada linear que explora átomos de frequência central $\xi$ e simetria com respeito a $b$. Ela possui a característica de ter um espalhamento tempo-frequência constante, conferindo a mesma resolução para cada um desses domínios (conforme o princípio da incerteza!) uma vez definida a função janela. Ela também admite inversa e é considerada uma representação completa, estável e redundante do sinal. Analogamente ao spectrum de Fourier, o espectrograma da WFT é assim definido:
+
+\begin{equation}
+|\widehat{f}(\xi, b)|^{2} = \left|\int_{-\infty}^{+\infty}f(t)g(t-b)e^{-\i \xi t}dt\right| ^{2}.
+\end{equation}
+
+Seis funções janela foram utilizadas no presente trabalho: Retangular, Hanning, Tukey, Bartlett, Papoulis e Hamming. Uma vez definidas, utilizou-se o pacote \texttt{numpy} do \texttt{Python} para aplicar a transformada janelada sobre diferentes definições da função de Cantor a partir do método \texttt{numpy.fft}. 
+
+A função de Cantor utilizada possui o parâmetro \texttt{seed}, que equivale ao número de elementos do conjunto de Cantor. Por exemplo, \texttt{seed} = n gera um output com $2^{n+1}$ valores que correspondem aos pontos extremos dos intervalos de $\mathcal{C}_{n}$. 
+
+Ela foi gerada com o seguinte código:
+\begin{lstlisting}[language=python,style=mystyle1]
+def cantor ( n ) :
+    return [ 0. ] + cant ( 0. , 1. , n ) + [ 1. ]
+def cant ( x , y , n ) :
+    if n == 0:
+        return [ ]
+    new_pts = [ 2. * x/3. + y/3. , x/3. + 2. * y / 3. ]
+    return cant( x , new_pts[ 0 ] , n-1) + new_pts + cant( new_pts[ 1 ] , y , n-1)
+seed=5
+x = np.array ( cantor( seed ) )
+y = np.cumsum( np.ones( len ( x ) ) / ( len (x)-2) ) - 1. / ( len (x)-2)
+y[-1] = 1
+\end{lstlisting}
+
+Os valores do array \texttt{x} acima (linhas 9) foram tratados como um sinal no presente estudo. Três valores de \texttt{seed} foram testados: cinco, sete e dez. Espectrogramas foram gerados para cada cenário. Os resultados são apresentados na próxima seção.

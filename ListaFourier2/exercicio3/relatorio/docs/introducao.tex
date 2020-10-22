@@ -2,23 +2,32 @@
 
 \chapter{INTRODUÇÃO}
 
-Amostragem é a redução de um sinal contínuo num sinal discreto e finito. Por sua vez, uma amostra é um valor ou conjunto de valores num determinado ponto do tempo e/ou espaço. Em outras palavras, amostrar um sinal torna-o trabalhável num computador. Como um primeiro passo para o estudo de propriedades de um sinal, seja via análise de Fourier ou qualquer outra ferramenta, este procedimento está sujeito a diversos fatores que afetam profundamente a qualidade da análise. Alguns destes fatores são o tempo total do procedimento de aquisição do sinal e a frequência da amostragem. 
+O conjunto de Cantor $\mathcal{C}$ é um subconjunto do intervalo [0,1] definido pelo matemático George Cantor no paper \citeonline{cantor1884puissance}. Esse conjunto é obtido a partir de repetidas remoções do terço médio de um segmento. Iniciando com o intervalo fechado $[0,1]$, remove-se o intervalo aberto $(\frac{1}{3},\frac{2}{3})$ para se obter $[0,\frac{1}{3}] \bigcup [\frac{2}{3}, 1]$, que são dois segmentos fechados disjuntos. No próximo passo, os terços médios destes dois segmentos são removidos gerando assim quatro segmentos. O conjunto de Cantor é o resultado desta operação após infinitos passos (ver Figura \ref{fig:fractal}).
 
-Estes fatores estão diretamente relacionados à robustez da observação: tempo de observação num telescópio e alta taxa de aquisição de dados (e poder de processamento para trabalhar com eles) são custosos. Portanto, quando disponíveis, devem ser explorados ao máximo. O presente manuscrito discute os diferentes efeitos da amostragem sobre a análise de Fourier, em particular sobre a Transformada de Fourier. As melhores condições de amostragem do sinal são detalhadas.
+\begin{figure}[ht!]
+	\vspace{1mm}	% acrescentar o espaçamento vertical apropriado entre o título e a borda superior da figura
+	\begin{center}
+		\resizebox{15cm}{!}{\includegraphics{../Figuras/cantor_fractal.png}}
+	\end{center}
+	\vspace{1mm}	% acrescentar o espaçamento vertical apropriado entre a borda inferior da figura e a legenda ou a fonte quando não há legenda (o valor pode ser negativo para subir)
+	\caption{Conjunto de Cantor após sete iterações. FONTE: en.wikipedia.org Image:Cantor\_set\_in\_seven\_iterations.svg.}
+	%\legenda{LEGENDA.} % 	% legenda - para deixar sem legenda usar comando \legenda{} (nunca deve-se comentar o comando \legenda)
+	\label{fig:fractal}
+	%\FONTE{}	% fonte consultada (elemento obrigatório, mesmo que seja produção do próprio autor)
+\end{figure}
 
-Este relatório está assim organizado: na Seção 2 a operação de convolução, relevante para o assunto deste estudo, é introduzida; na Seção 3 os efeitos da janela de observação são discutidos; na Seção 4 os conceitos de aliasing, critério e frequência de Nyquist são introduzidos; na Seção 5 são oferecidas as considerações finais do autor.
+O conjunto $\mathcal{C}$ é um conjunto compacto e não vazio. Seja $\mathcal{C}_{0} = [0,1]$ e $\mathcal{C}_{1} = \mathcal{C}_{0}- (\frac{1}{3},\frac{2}{3})$, e seja $\mathcal{C}_{n}$ o resultado após $n$ passos. Portanto, o conjunto de Cantor pode ser escrito como $\mathcal{C} = \bigcap_{n=0}^{\infty} \mathcal{C}_{n}$. Cada conjunto $\mathcal{C}_{n}$ é a união de conjunto finitos compactos e é portanto compacto. Além disso, $\mathcal{C}_{n+1} \subset \mathcal{C}_{n}$ para todo $n$, portanto $\mathcal{C}_{n}$ é a interseção de conjuntos compactos cada vez menores.
 
-% Paragrafo original (Projeto Fourier)
-%O fluxo solar na faixa de 10.7 cm (doravante chamado F10.7) é uma medida da intensidade da emissão do sol na faixa do rádio, mais precisamente em 10.7 cm (ou 2800 MHz). Este índice é um indicador da atividade magnética do Sol, fornecendo informações da atividade solar no ultravioleta e raio-X. Por isso, esse índice é muito relevante em ramos como astrofísica, meteoroglogia e geofísica. Com aplicações em modelagem climática, seu monitoramento é importante para a manutenção dos sistemas de comunicação via satélite \cite{huang2009forecast}. 
+Outras propriedades do conjunto de Cantor são: tem tamanho infinito e não numerável, é um fractal e tem medida nula. Por sua vez, a \textbf{função de Cantor} $G$, também função de Lebesgue ou escadaria do diabo, é uma função com as seguintes propriedades \cite{dovgoshey2006cantor}: 
+\begin{itemize}
+\item $G$ é contínua e crescente mas não absolutamente contínua.
+\item $G$ é uma função singular.
+\item $G$ mapeia o conjunto de Cantor $\mathcal{C}$ no intervalo [0,1].
+\end{itemize}
 
-%Uma das ferramentas mais usadas para trabalhar com séries temporais deste tipo é a análise espectral, que objetiva representar um sinal como a combinação linear de funções periódicas. Para dados obtidos com um \textit{sampling rate} uniforme, i.e., sob a mesma taxa de registro durante toda a observação, o espectro de potência via FFT (do inglês, Fast Fourier Transform) é o método padrão utilizado. Porém, nem sempre o sinal disponível foi adquirido sob intervalo uniforme. Por exemplo,  o registro da variação do brilho de estrelas via telescópios terrestres está sujeito a diversas interrupções, umas de natureza periódica (rotação e translação terrestre) e outras de natureza não-periódica (mal tempo, problemas do equipamento, etc.). 
+Essa função é muito interessante de ser estudada no contexto da análise de sinais. De forte variação e não estacionária, ela pode ser explorada a partir da Transformada Janelada de Fourier. O presente estudo testa diferentes funções janela e produz espectrogramas da função de Cantor para diferentes valores de $n$ do conjunto $\mathcal{C}_{n}$. Este manuscrito está assim dividido: na Seção 2 a metodologia empregada é apresentada; na Seção 3 os resultados são oferecidos com breve discussão; na Seção 4 estão as considerações finais do autor.
 
-%O espectro de potência não é apropriado para dados não uniformes, e uma nova ferramenta se faz necessária para esses casos. O periodograma de Lomb-Scargle \cite{lomb1976least,scargle1982studies} é um algoritmo para detectar e caracterizar a periodicidade de séries temporais com sampling rates não uniformes. Ele utiliza o método de mínimos quadrados para ajustar funções senoidais aos dados \cite{2017arXiv170309824V}. 
 
-%O presente trabalho é um follow-up de \citeonline{Leo}. Os dados F10.7 são manipulados com o fim de simular aquisição não uniforme. Experimentos são efetuados com a simulação de diferentes cenários de sampling rates não uniformes, com a geração do periodograma de Lomb-Scargle utilizando a biblioteca \texttt{astropy}. O presente manuscrito está assim organizado: na Seção 2 a metodologia empregada é introduzida; na Seção 3 os resultados são apresentados com uma breve discussão; na Seção 4 são oferecidas as considerações finais do autor.
 
-% Paragrafo original (Projeto Fourier)
-%Em conjunto com os dados de manchas solares, F10.7 é um dos indicadores mais usados para previsão da atividade solar. Por esse motivo, muitos estudos objetivando predição do clima espacial o utilizam como parâmetro de input. Por exemplo, \citeonline{mordvinov1986prediction} utilizou autorregressão multiplicativa para predição mensal dos valores de F10.7. \citeonline{dmitriev1999solar} aplicaram redes neurais para a predição. Por sua vez, \citeonline{zhong2005application} aplicou análise espectral para prever os valores de F10.7. Já \citeonline{bruevich2014study} aplicou análise Wavelet sobre as médias mensais desse dado para análise da série temporal.
 
-% Paragrafo original (Projeto Fourier)
-%A análise espectral é um método para representar um sinal como a combinação linear de funções periódicas. Ela faz parte de uma família de técnicas chamadas de Análise de Fourier. No presente trabalho, os dados do índice F10.7 são analisados no contexto da Análise de Fourier. Este manuscrito está assim organizado: na Seção 2 os dados e os tratamentos nele realizados são descritos; na Seção 3 é feita uma recapitulação da Análise de Fourier; na Seção 4 os resultados são apresentados com uma breve discussão; na Seção 5 são oferecidas as considerações finais do autor.
+

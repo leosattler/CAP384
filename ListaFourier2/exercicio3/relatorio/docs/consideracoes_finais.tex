@@ -1,6 +1,8 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{CONSIDERAÇÕES FINAIS}
 
-Em resumo, a análise de sinais requer um arcabouço teórico robusto desde a aquisição do sinal. Os diversos efeitos da amostragem foram discutidos no presente manuscrito, tendo em vista a análise de Fourier, em particular o conceito de transformada de Fourier e a operação matemática conhecida como convolução. 
+A função de Cantor aqui explorada distribui sua energia para mais componentes frequências quanto maior o valor do parâmetro \texttt{seed}. A principal característica da WFT é: quanto maior (menor) a largura da janela, menor (maior) será a resolução temporal da ferramenta e maior (menor) será sua resolução frequencial. Com isso, a WFT requer uma janela de tamanho maior quanto maior o valor de \texttt{seed} para ser capaz de captar com detalhe a contribuição de cada frequência. 
 
-Dois fatores foram vistos como cruciais durante a amostragem do sinal: (1) o tamanho da janela de observação $T_{obs}$ afeta a transformada de Fourier de modo que a resolução espectral é $\delta f = \frac{1}{T_{obs}}$, e (2) o \textbf{teorema da amostragem} deve ser satisfeito para evitar aliasing, de modo que a largura de banda do sinal $B$ deve ser pequena o suficiente para satisfazer $B \leq f_{Ny}$ ou $B \leq \frac{f_{samp}}{2}$.
+As seis funções janela empregadas foram capazes de analisar conteúdos frequenciais da função de Cantor localmente. Em alguns casos, algumas funções janela foram mais úteis que outras em captar as diferentes frequências da função. Em conjunto, os resultados evidenciam a capacidade da WFT (em especial, do espectrograma) de conferir à análise de Fourier tradicional um componente extra de análise, a saber, o tempo.
+ 
+

@@ -3,7 +3,7 @@
 \section*{\large Exercício 2}
 \addcontentsline{toc}{chapter}{\protect\numberline{}\large Exercício 2}%
 
-Neste exercício implementa-se a Transformada Janelada de Fourier (ou WFT, do inglês Windowed Fourier Trnasform) sobre os chirps do Exercício 1. Seis janelas são implementadas: Retangular, janela de Hanning, de Tukey, de Barlett, de Papoulis e de Hamming. Elas estão ilustradas nas Figuras 2.1 e 2.3.
+Neste exercício implementa-se a Transformada Janelada de Fourier (ou WFT, do inglês Windowed Fourier Trnasform) sobre os chirps do Exercício 1. Seis janelas são implementadas: Retangular, janela de Hanning, de Tukey, de Bartlett, de Papoulis e de Hamming. Elas estão ilustradas nas Figuras 2.1 e 2.3.
 
 \subsection*{2.a} 
 \addcontentsline{toc}{section}{\protect\numberline{} 2.a}%
@@ -11,30 +11,30 @@ Neste exercício implementa-se a Transformada Janelada de Fourier (ou WFT, do in
 As janelas deste exercício foram assim definidas (gráficos das Figura 2.1 e 2.3):
 
 Janela \textbf{retangular}:
-\lstinputlisting[language=python, style=mystyle, firstline=75, lastline=78]{../scripts/exercicio2/janelas/window_plots.py}
+\lstinputlisting[language=python, style=mystyle, firstline=73, lastline=120]{../scripts/exercicio2/espectros/window_spectra.py}
 
 
 Janela de \textbf{Hanning}:
-\lstinputlisting[language=python, style=mystyle, firstline=80, lastline=83]{../scripts/exercicio2/janelas/window_plots.py}
+\lstinputlisting[language=python, style=mystyle, firstline=122, lastline=140]{../scripts/exercicio2/espectros/window_spectra.py}
 
 
 Janela de \textbf{Hamming}:
-\lstinputlisting[language=python, style=mystyle, firstline=85, lastline=88]{../scripts/exercicio2/janelas/window_plots.py}
+\lstinputlisting[language=python, style=mystyle, firstline=142, lastline=160]{../scripts/exercicio2/espectros/window_spectra.py}
 
 
-Janela de \textbf{Barllet}:
-\lstinputlisting[language=python, style=mystyle, firstline=90, lastline=93]{../scripts/exercicio2/janelas/window_plots.py}
+Janela de \textbf{Bartlett}:
+\lstinputlisting[language=python, style=mystyle, firstline=162, lastline=180]{../scripts/exercicio2/espectros/window_spectra.py}
 
 
 Janela de \textbf{Papoulis}:
-\lstinputlisting[language=python, style=mystyle, firstline=95, lastline=100]{../scripts/exercicio2/janelas/window_plots.py}
+\lstinputlisting[language=python, style=mystyle, firstline=182, lastline=202]{../scripts/exercicio2/espectros/window_spectra.py}
 
 
 Janela de \textbf{Tukey}:
-\lstinputlisting[language=python, style=mystyle, firstline=102, lastline=129]{../scripts/exercicio2/janelas/window_plots.py}
+\lstinputlisting[language=python, style=mystyle, firstline=204, lastline=246]{../scripts/exercicio2/espectros/window_spectra.py}
 
 
-Essas funções foram aplicadas sobre valores de \texttt{t} de -1 a +1, gerando os gráficos da Figura 2.1. Suas transformadas estão na Figura 2.2.
+As funções janela estão graficadas com tamanho igual a 0.5 sobre valores de \texttt{t} de -0.4 a +0.4 na Figura 2.1. Suas transformadas estão na Figura 2.2.
 
 % FIGURA
 \begin{figure}[ht!]
@@ -51,7 +51,7 @@ Essas funções foram aplicadas sobre valores de \texttt{t} de -1 a +1, gerando 
 
 % FIGURA
 \begin{figure}[ht!]
-	\legenda{Figura 2.1: Transformadas de Fourier das funções janela utilizadas neste exercício com largura igual a 0.5.}
+	\legenda{Figura 2.2: Transformadas de Fourier das funções janela utilizadas neste exercício com largura igual a 0.5.}
 	\vspace{2mm}	% acrescentar o espaçamento vertical apropriado entre o título e a borda superior da figura
 	\begin{center}
 		\resizebox{\textwidth}{!}{\includegraphics{../scripts/exercicio2/ffts/Windows_FFTs_ws0.5.jpg}}	
@@ -101,17 +101,17 @@ As mesmas janelas, porém com tamanho igual a 0.1, produzem os resultados das Fi
 
 Dada uma escolha do sinal (variável \texttt{chirp} abaixo, à qual é atribuída um dos chirps do Exercício 1), os espectrogramas foram calculados a partir do método \texttt{spec}, recebendo como input: o produto do chirp e da função janela \textit{shiftada}, a resolução \texttt{res} (para cálculo dos bins de frequência), a frequência final de interesse \texttt{f\_final}, e o número de bins \texttt{N} com o qual a FFT será implementada.
 
-\lstinputlisting[language=python, style=mystyle, firstline=178, lastline=228]{../scripts/exercicio2/espectros/window_spectra.py}
+\lstinputlisting[language=python, style=mystyle, firstline=298, lastline=348]{../scripts/exercicio2/espectros/window_spectra.py}
 
 A seguir são apresentados os resultados das WFT de cada chirp do Exercício 1. Dois valores foram usados para o tamanho das janelas implementadas e dois domínios diferentes para cada chirp (a saber, os domínios referentes às Figuras 1.1 e 1.2). O espectrograma de cada caso foi gerado.
 
 As figuras dos espectrogramas foram criadas com o pacote \texttt{matplotlib}, em particular com a função \texttt{countourf}. Foi utilizando o mapa de cor \texttt{jet} e 256 níveis de cor. Cada figura possui o mesmo intervalo de cor em sua representação (mesmos \texttt{vmin} e \texttt{vmax}). O trecho do código que gera a visualização das Figuras 2.4 a 2.16 é exibido abaixo:
-\lstinputlisting[language=python, style=mystyle, firstline=232, lastline=283]{../scripts/exercicio2/espectros/window_spectra.py}
+\lstinputlisting[language=python, style=mystyle, firstline=352, lastline=411]{../scripts/exercicio2/espectros/window_spectra.py}
 
 %%%%%%%%%%%%%%%% Gaussiano
 
 
-Espectrogramas do \textbf{chirp gaussiano}, $-02 \leq t \leq 2$ e tamanho das janelas = 0.1: Figura 2.4.
+Espectrogramas do \textbf{chirp gaussiano}, $-2 \leq t \leq 2$ e tamanho das janelas = 0.1: Figura 2.4.
 
 % FIGURA
 \begin{figure}[ht!]
@@ -124,7 +124,7 @@ Espectrogramas do \textbf{chirp gaussiano}, $-02 \leq t \leq 2$ e tamanho das ja
 	\label{ex1_fig1}
 \end{figure}
 
-Espectrogramas do \textbf{chirp gaussiano}, $-02 \leq t \leq 2$ e tamanho das janelas = 0.5: Figura 2.5.
+Espectrogramas do \textbf{chirp gaussiano}, $-2 \leq t \leq 2$ e tamanho das janelas = 0.5: Figura 2.5.
 
 % FIGURA
 \begin{figure}[ht!]
@@ -302,13 +302,14 @@ Espectrogramas do \textbf{chirp hiperbólico}, $0 \leq t \leq 6$ e tamanho das j
 
 Se o objetivo da análise é obter detalhes da variação das diferentes frequências do sinal ao longo do tempo, a implementação das WFT com janelas grandes é desejada, uma vez que isso oferecerá maior resolução frequencial no espectrograma. Para o chirp gaussiano, uma vez que a variação da frequência é suave e com poucos componentes, as janelas de tamanho 0.1 e 0.5 (Figuras 2.4, 2.5 e 2.6) foram equivalentes em resultado. 
 
-Já para o chirp linear, a janela de tamanho igual a 0.1 não foi capaz de captar a variação linear (e suave) da frequência (Figura 2.7). As janelas de tamanho 0.5 conseguiram. Em particular, na Figura 2.8 somente a janela retangular captou bem a variação da frequência. Isso pode ser explicado pela Figura 2.1, que ilustra a transformada da janela retangular como tendo a menor largura (em frequência) e, portanto, melhor resolução frequencial. Em contrapartida, a Figura 2.4 ilustra que todas as transformadas possuem larga distribuição, ou seja, baixíssima resolução.
+Já para o chirp linear, a janela de tamanho igual a 0.1 não foi capaz de captar a variação linear (e suave) da frequência (Figura 2.7). As janelas de tamanho 0.5 conseguiram. %Em particular, na Figura 2.8 somente a janela retangular captou bem a variação da frequência. Isso pode ser explicado pela Figura 2.1, que ilustra a transformada da janela retangular como tendo a menor largura (em frequência) e, portanto, melhor resolução frequencial. %Em contrapartida, a Figura 2.4 ilustra que todas as transformadas possuem larga distribuição, ou seja, baixíssima resolução.
 
-As Figuras 2.10 e 2.11 (chirp quadrático), quando contrastadas, também ilustram a incapacidade das janelas de tamanho igual a 0.1 de contribuir para a análise deste chirp. As Figuras 2.11 e 2.12 atestam a variação quadrática da frequência do chirp analisado com o tempo.
+%Em particular, na Figura 2.8 somente a janela retangular captou bem a variação da frequência. Isso pode ser explicado pela Figura 2.1, que ilustra a transformada da janela retangular como tendo a menor largura (em frequência) e, portanto, melhor resolução frequencial. 
+As Figuras 2.10 e 2.11 (chirp quadrático), quando contrastadas, também ilustram a incapacidade das janelas de tamanho igual a 0.1 de contribuir para a análise deste chirp. Na Figura 2.10, assim como na Figura 2.7, somente a janela retangular foi capaz de captar uma variação apreciável de frequência. Isso pode ser explicado pela Figura 2.1, que ilustra a transformada da janela retangular como tendo a menor largura (em frequência) e, portanto, melhor resolução frequencial. %As Figuras 2.11 e 2.12 atestam a variação quadrática da frequência do chirp analisado com o tempo.
 
-O chirp hiperbólico foi o sinal que melhor ilustrou o \textit{trade-off} da resolução tempo $\times$ frequência por trás da definição do tamanho da janela. As Figuras 2.13 e 2.15 exibem os espectrogramas para as janelas de tamanho igual a 0.1, ou seja, de alta resolução temporal. A variação das cores (das frequências) é muito maior na direção do eixo horizontal nestas figuras. A WFT com estas janelas captou bem a variação temporal do sinal sem determinar bem quais frequências compõem o sinal localmente. Em contrapartida, nas Figura 2.14 e 2.16 o tamanho das janelas é 0.5, ou seja, a resolução temporal é menor. Com isso, o espectrograma exibe forte variação de cores que resulta da melhor representação de frequências, ao passo que perde a capacidade de descrever a variação horizontal dessas cores como antes. 
+O chirp hiperbólico foi o sinal que melhor ilustrou o \textit{trade-off} da resolução tempo $\times$ frequência por trás da definição do tamanho da janela. As Figuras 2.13 e 2.15 exibem os espectrogramas para as janelas de tamanho igual a 0.1, ou seja, de alta resolução temporal. A variação das cores (das frequências) na direção do eixo horizontal nestas figuras é bem acentuada. A WFT com estas janelas captou bem a variação temporal do sinal sem determinar bem quais frequências compõem o sinal localmente. Em contrapartida, nas Figura 2.14 e 2.16 o tamanho das janelas é 0.5, ou seja, a resolução temporal é menor. Com isso, o espectrograma exibe forte variação de cores que resulta da melhor representação de frequências, ganhando resolução vertical ao passo que perde a capacidade de descrever a variação horizontal dessas cores como antes. 
 
-Em conjunto, as figuras desta seção atestam a capacidade da WFT de analisar conteúdos frequenciais de um sinal localmente, conferindo uma componente extra de análise (o tempo), antes ausente na análise de Fourier tradicional, que possui um caráter global de análise. Com a WFT surgem parâmetros relevantes à nossa análise desde a análise de Fourier, a saber, o tamanho da função janela escolhida, diretamente relacionado ao já conhecido princípio da incerteza. Quanto maior (menor) a largura da janela, menor (maior) será a resolução temporal da ferramenta e maior (menor) será sua resolução frequencial. Por fim, outro importante parâmetro da WFT é a função janela em si, uma vez que os resultados deste exercício sugerem que, em alguns casos, algumas funções janela são mais úteis que outras em captar as diferentes frequências de um sinal.
+Em conjunto, as figuras desta seção atestam a capacidade da WFT de analisar conteúdos frequenciais de um sinal localmente, conferindo uma componente extra de análise: o tempo. Este componente é ausente na análise de Fourier tradicional, que possui um caráter global de análise. Com a WFT surgem parâmetros relevantes à nossa análise desde a análise de Fourier, a saber, o tamanho da função janela escolhida, diretamente relacionado ao já conhecido princípio da incerteza. Quanto maior (menor) a largura da janela, menor (maior) será a resolução temporal da ferramenta e maior (menor) será sua resolução frequencial. Por fim, outro importante parâmetro da WFT é a função janela em si, uma vez que os resultados deste exercício sugerem que, em alguns casos, algumas funções janela são mais úteis que outras em captar as diferentes frequências de um sinal.
 
 
 
