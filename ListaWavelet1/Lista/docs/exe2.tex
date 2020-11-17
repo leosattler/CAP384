@@ -1,0 +1,36 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section*{\large Exercício 2}
+\addcontentsline{toc}{chapter}{\protect\numberline{}\large Exercício 2}%
+
+Provarei que:
+
+\begin{equation*}
+\int \int \mathfrak{W}_{f}^{\psi}(a,\tau)\overline{\mathfrak{W}_{g}^{\psi}(a,\tau)}d \tau \frac{d a}{a^{2}} = C_{\psi}\int f(t)\overline{g(t)}dt.
+\end{equation*}
+
+\textbf{Resolução:}
+
+Seja $C_{\psi}$ definido a partir da seguinte condição de admissibilidade:
+
+\begin{equation}
+C_{\psi} := \int_{-\infty}^{\infty}\frac{|\hat{\psi}(\omega)|^{2}}{|\omega|}d\omega \leq \infty.
+\end{equation}
+
+Considerando a expressão
+
+\begin{equation*}
+\int_{-\infty}^{\infty}[\mathfrak{W}_{f}^{\psi}(a,\tau)\overline{\mathfrak{W}_{g}^{\psi}(a,\tau)}]d \tau,
+\end{equation*}
+
+podemos integrá-la com respeito a $da/a^{2}$ de $-\infty$ a $\infty$ e, usando a definição de $C_{\psi}$ acima, temos ($\hat{f}$ denota a transformada de Fourier da função):
+
+\begin{align*}
+& \int_{-\infty}^{\infty} \left\{ \int_{-\infty}^{\infty}[\mathfrak{W}_{f}^{\psi}(a,\tau)\overline{\mathfrak{W}_{g}^{\psi}(a,\tau)}]d \tau  \right\} \frac{d a}{a^{2}} \\
+=& \frac{1}{2\pi}\int_{-\infty}^{\infty} \left\{ \hat{f}(t)\overline{\hat{g}(t)} \int_{-\infty}^{\infty} \frac{|\hat{\psi}(at)|^{2}}{|a|}da \right\} dt \\
+=& \frac{1}{2\pi}\int_{-\infty}^{\infty} \left\{ \hat{f}(t)\overline{\hat{g}(t)} \int_{-\infty}^{\infty} \frac{|\hat{\psi}(t')|^{2}}{|t'|}dt' \right\} dt \\
+=& C_{\psi}\frac{1}{2\pi} \int \hat{f}(t)\overline{\hat{g}(t)}dt\\
+=& C_{\psi} \int f(t)\overline{g(t)}dt.  \tag*{\text{(Q.E.D.)}}
+\end{align*}
+
+

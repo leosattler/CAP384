@@ -1,0 +1,53 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section*{\large Exercício 3}
+\addcontentsline{toc}{chapter}{\protect\numberline{}\large Exercício 3}%
+
+% EXEMPLO PARA ADICIONAR FIGURA
+%\begin{figure}[ht!]
+	%\caption{Série e histogramas.}
+%	\vspace{0mm}	% acrescentar o espaçamento vertical apropriado entre o título e a borda superior da figura
+%	\begin{center}
+%		\resizebox{15cm}{!}{\includegraphics{Figuras/ex1/Exercicio1_n_64.jpg}}
+%	\end{center}
+%	\vspace{-2mm}	% acrescentar o espaçamento vertical apropriado entre a borda inferior da figura e a legenda ou a fonte quando não há legenda (o valor pode ser negativo para subir)
+%	\legenda{Figura 1.1: Dez sinais e seus respectivos histogramas para  asérie com $N$ = 64 do grupo noise.}	% legenda - para deixar sem legenda usar comando \legenda{} (nunca deve-se comentar o comando \legenda)
+%	\label{ex1_fig1}
+%	%\FONTE{}	% fonte consultada (elemento obrigatório, mesmo que seja produção do próprio autor)
+%\end{figure}
+
+%====================================================================== 3
+
+Para este exercício, será utilizada a seguinte definição para o produto interno:
+
+\begin{equation*}
+\langle f, g \rangle := \int f(x) \overline{g(x)}dx.
+\end{equation*}
+
+\textbf{Resolução:}
+
+Considere a relação abaixo,
+
+\begin{equation*}
+\int \int \mathfrak{W}_{f}^{\psi}(a,\tau)\overline{\mathfrak{W}_{g}^{\psi}(a,\tau)}d \tau \frac{d a}{a^{2}} = C_{\psi}\langle f, g \rangle.
+\end{equation*}
+
+Seja $f$ uma função contínua em $t$. Usando uma função Gaussiana $g_{\alpha}(-t)$ para a função $g$, 
+
+\begin{equation*}
+g_{\alpha}(t) := \frac{1}{2\sqrt{\pi a}} e^{-\frac{t^{2}}{4\alpha}},
+\end{equation*}
+
+e fazendo $a \rightarrow 0^{+}$, chega-se ao seguinte resultado:
+
+\begin{align*}
+f(x) &= \frac{1}{C_{\phi}} \lim_{\alpha \rightarrow 0^{+}} \int_{-\infty}^{\infty}\int_{-\infty}^{\infty}[\mathfrak{W}_{\psi}^{f}(a, \tau)\overline{\langle g_{\alpha}(-t), \psi_{(a, \tau)} \rangle}]\frac{d a}{a^{2}}d\tau \\
+&= \frac{1}{C_{\phi}} \int_{-\infty}^{\infty}\int_{-\infty}^{\infty}[\mathfrak{W}_{\psi}^{f}(a, \tau)] \psi_{(a, \tau)}(t)\frac{d a}{a^{2}}d\tau.  \tag*{\text{(Q.E.D.)}}
+\end{align*}
+
+
+
+
+
+
+

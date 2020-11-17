@@ -1,0 +1,116 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section*{\large Exercício 1}
+\addcontentsline{toc}{chapter}{\protect\numberline{}\large Exercício 1}%
+
+%Bla bla bla
+
+% EXEMPLO PARA ADICIONAR FIGURA
+%\begin{figure}[ht!]
+	%\caption{Série e histogramas.}
+%	\vspace{0mm}	% acrescentar o espaçamento vertical apropriado entre o título e a borda superior da figura
+%	\begin{center}
+%		\resizebox{15cm}{!}{\includegraphics{Figuras/ex1/Exercicio1_n_64.jpg}}
+%	\end{center}
+%	\vspace{-2mm}	% acrescentar o espaçamento vertical apropriado entre a borda inferior da figura e a legenda ou a fonte quando não há legenda (o valor pode ser negativo para subir)
+%	\legenda{Figura 1.1: Dez sinais e seus respectivos histogramas para  asérie com $N$ = 64 do grupo noise.}	% legenda - para deixar sem legenda usar comando \legenda{} (nunca deve-se comentar o comando \legenda)
+%	\label{ex1_fig1}
+%	%\FONTE{}	% fonte consultada (elemento obrigatório, mesmo que seja produção do próprio autor)
+%\end{figure}
+
+%\subsection*{1.1}
+%\addcontentsline{toc}{section}{\protect\numberline{} 1.1}%
+
+Dada a transformada wavelet contínua (CWT) conforme definida abaixo,
+
+\begin{equation*}
+\mathcal{W}_{f}^{\psi} = C\int_{-\infty}^{\infty}f(t)\overline{\psi \left(\frac{t-b}{a} \right)}dt, \qquad a>0,
+\end{equation*}
+
+tal que
+
+\begin{equation*}
+C\int_{-\infty}^{\infty}\left| \psi \left( \frac{t-b}{a} \right) \right| ^{2} dt
+\end{equation*}
+
+tenha energia unitária, calcularei o valor de $C$ para as normas $\mathbb{L}^2$ e $\mathbb{L}^1$.
+
+\textbf{Resolução:}
+
+Seja a norma do espaço $\mathbb{L}^2$:
+
+\begin{equation*}
+||\psi||_{2} := \left\{\int_{-\infty}^{\infty} |\psi(t)|^{2}dt\right\}^{1/2},
+\end{equation*}
+
+onde $\psi \in \mathbb{L}^{2}$. Sendo assim, para qualquer a,b $\in \mathbb{Z}$, $a>0$, temos:
+
+\begin{align*}
+||\psi(b/a)||_{2} &= \left\{\int_{-\infty}^{\infty} |\psi\left(\frac{t-b}{a}\right)|^{2}dt\right\}^{1/2} \\
+ &= a^{1/2} ||\psi||_{2}.
+\end{align*}
+
+Portanto, se uma função $\psi \in \mathbb{L}^{2}$ tem energia unitária, então todas as funções $\psi_{a,b}$ definida por
+
+\begin{equation*}
+\psi_{a,b}(t) := a^{-1/2}\psi\left(\frac{t-b}{a}\right), \qquad a,b \in \mathbb{Z},
+\end{equation*}
+
+também possuem energia unitária, ou seja,
+
+\begin{equation*}
+||\psi_{a,b}||_{2} = ||\psi||_{2}=1, \qquad a,b \in \mathbb{Z}.
+\end{equation*}
+
+Sendo assim: 
+
+\begin{equation*}
+C := a^{-1/2}.  \tag*{$\blacksquare$}
+\end{equation*}
+
+Similarmente para a norma do espaço $\mathbb{L}^{1}$:
+
+\begin{equation*}
+||\psi||_{1} := \int_{-\infty}^{\infty} |\psi(t)|^{2}dt,
+\end{equation*}
+
+e, sendo assim:
+
+\begin{equation*}
+||\psi(b/a)||_{1} = a ||\psi||_{2}.
+\end{equation*}
+
+Portanto:
+
+\begin{equation*}
+C := a^{-1}.  \tag*{$\blacksquare$}
+\end{equation*}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
